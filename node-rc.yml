@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nodeapp
+  labels:
+    name: nodeapp
+    app: nodeapp
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: nodeapp
+      labels:
+        name: nodeapp
+        app: nodeapp
+    spec:
+      containers:
+        - name: nodeapp
+          image: astro3/nodeapp
+          ports:
+            - name: nodeapp
+              containerPort: 3000
+              protocol: TCP

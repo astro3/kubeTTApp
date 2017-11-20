@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flume
+  labels:
+    name: flume
+    app: flume
+spec:
+  containers:
+    - name: flume
+      image: astro3/flume
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: "FLUME_AGENT_NAME"
+          value: "agent"
+        - name: "FLUME_CONF_FILE"
+          value: "/var/tmp/flume.conf"
+      ports:
+        - name: flume
+          containerPort: 9999
+          protocol: TCP 

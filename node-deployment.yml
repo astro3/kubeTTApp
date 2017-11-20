@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: nodeapp
+  labels:
+    name: nodeapp
+    app: nodeapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: nodeapp
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        name: nodeapp
+        app: nodeapp
+    spec:
+      containers:
+        - name: nodeapp
+          image: astro3/nodeapp:2.1.6
+          ports:
+            - name: nodeport
+              containerPort: 3000
+              protocol: TCP

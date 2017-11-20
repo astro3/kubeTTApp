@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp
+  labels:
+    app: nodeapp
+spec:
+  ports:
+  - port: 3000
+    name: nodeapp
+  clusterIP: None
+  selector:
+    app: nodeapp
+---
+apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: nodeapp
+spec:
+  serviceName: "nodeapp"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp
+    spec:
+      containers:
+      - name: nodeapp
+        image: astro3/nodeapp:2.1.6
+        ports:
+        - containerPort: 3000
+          name: nodeapp
+        volumeMounts:
+        - name: nodevol
+          mountPath: /App
+  volumeClaimTemplates:
+  - metadata:
+      name: nodevol
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

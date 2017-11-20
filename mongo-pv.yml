@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+  labels:
+    type: NFS
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: slow
+#  mountOptions:
+#    - hard
+#    - nfsvers=4.1
+  nfs:
+    path: "/tmp/mongo-data"
+    server: 10.1.1.46

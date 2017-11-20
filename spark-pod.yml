@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spark
+  labels:
+    name: spark
+    app: spark
+spec:
+  containers:
+    - name: spark
+      image: astro3/spark
+      imagePullPolicy: IfNotPresent

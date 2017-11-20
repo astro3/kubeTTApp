@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    name: redis
+    app: redis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: redis
+      app: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - name: redis
+              containerPort: 6379
+              protocol: TCP

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: spark
+  labels:
+    name: spark
+    app: spark
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: spark
+      labels:
+        name: spark
+        app: spark
+    spec:
+      containers:
+        - name: spark
+          image: astro3/spark
+
